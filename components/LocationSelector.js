@@ -13,7 +13,7 @@ const style = {
     verticalLine: `w-0 h-[2rem] border-black border absolute z-10 left-[2.3rem] top-[2rem]`,
   }
 
-function LocationSelector() {
+const LocationSelector = () => {
     const [inFocus,setInFocus]= useState('from')
     const [pickup,setPickup]= useState('')
     const [dropoff,setDropoff]= useState('')
