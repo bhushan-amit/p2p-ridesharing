@@ -3,6 +3,9 @@ import uberBlack from '../assets/rides/uberBlack.png'
 import uberBlackSuv from '../assets/rides/uberBlackSuv.png'
 import uberSelect from '../assets/rides/uberSelect.png'
 import Image from 'next/image'
+
+import { useEffect, useState } from 'react'
+
 const style = {
     wrapper: `h-full flex flex-col`,
     title: `text-gray-500 text-center text-xs py-2 border-b`,
@@ -16,36 +19,52 @@ const style = {
     priceContainer: `flex items-center`,
     price: `mr-[-0.8rem]`,
   }
-const carList= [
-    {
-        service:'Auto',
-        iconUrl:auto,
-        priceMultiplier:1,
-        desc:'Suitable for 1-2 people'
-    },
-    {
-        service:'Hatchback',
-        iconUrl:uberSelect,
-        priceMultiplier:1.25,
-        desc:'Comfortable ride for 1-3 people'
-    },
-    {
-        service:'Sedan',
-        iconUrl:uberBlack,
-        priceMultiplier:1.5,
-        desc:'Amazing ride for upto 3 people '
-    },
-    {
-        service:'SUV',
-        iconUrl:uberBlackSuv,
-        priceMultiplier:1.75,
-        desc:'Comfortable ride for a large group of 5'
-    }
-]
+// const carList= [
+//     {
+//         service:'Auto',
+//         iconUrl:auto,
+//         priceMultiplier:1,
+//         desc:'Suitable for 1-2 people'
+//     },
+//     {
+//         service:'Hatchback',
+//         iconUrl:uberSelect,
+//         priceMultiplier:1.25,
+//         desc:'Comfortable ride for 1-3 people'
+//     },
+//     {
+//         service:'Sedan',
+//         iconUrl:uberBlack,
+//         priceMultiplier:1.5,
+//         desc:'Amazing ride for upto 3 people '
+//     },
+//     {
+//         service:'SUV',
+//         iconUrl:uberBlackSuv,
+//         priceMultiplier:1.75,
+//         desc:'Comfortable ride for a large group of 5'
+//     }
+// ]
 
 const basePrice =80 
 
 const RideSelector = () => {
+
+    const [carList,setCarList] = useState([])
+
+
+    useEffect(() => {
+      ;(async () =>{
+        try{
+
+        }catch(error){
+            const response=await fetch('api/db/getRideTypes')
+            const data= await response.json()
+            setCarList(data.data)
+        }
+      })
+    }, [])
+    
   return (
     <div className={style.wrapper}>
         <div className={style.title}>Choose a ride, or swipe up for more</div>
