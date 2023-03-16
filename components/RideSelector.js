@@ -16,6 +16,9 @@ const style = {
     priceContainer: `flex items-center`,
     price: `mr-[-0.8rem]`,
   }
+
+const RideSelector = () => {
+
 const carList= [
     {
         service:'Auto',
@@ -45,34 +48,43 @@ const carList= [
 
 const basePrice =80 
 
-const RideSelector = () => {
-  return (
-    <div className={style.wrapper}>
-        <div className={style.title}>Choose a ride, or swipe up for more</div>
-        <div className={style.carList}>
-            {carList.map((car,index) => (
-                <div className={style.car}>
-                    <Image
-                        src={car.iconUrl}
-                        className={style.carImage}
-                        height={50}
-                        width={50}
-                    />
-                    <div className={style.carDetails}>
-                        <div className={style.service}>{car.service}</div>
-                        <div className={style.desc}>{car.desc}</div>
-                        <div className={style.time}>5 mins away</div>     
-                    </div> 
-                    <div className={style.priceContainer}>
-                        <div className={style.price}>
-                           Rs. {((basePrice * car.priceMultiplier).toFixed(2))}
-                        </div>
-                    </div>
-                </div>
-            ))}
-        </div>
-    </div>
-  )
-}
 
+    return (
+        <div className={style.wrapper}>
+          <div className={style.title}>Choose a ride, or swipe up for more</div>
+          <div className={style.carList}>
+            {carList.map((car, index) => (
+              <div
+                key={index}
+                className={`${
+                  
+                     style.car
+                }`}
+                onClick={() => {
+                  
+                  
+                }}
+              >
+                <Image
+                  src={car.iconUrl}
+                  className={style.carImage}
+                  height={50}
+                  width={50}
+                />
+                <div className={style.carDetails}>
+                  <div className={style.service}>{car.service}</div>
+                  <div className={style.time}>5 min away</div>
+                </div>
+                <div className={style.priceContainer}>
+                  <div className={style.price}>
+                    Rs. {((basePrice ) * car.priceMultiplier).toFixed(2)}
+                  </div>
+                
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+}
 export default RideSelector
