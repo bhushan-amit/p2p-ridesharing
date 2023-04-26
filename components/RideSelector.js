@@ -4,6 +4,10 @@ import uberBlack from '../assets/rides/uberBlack.png'
 import uberBlackSuv from '../assets/rides/uberBlackSuv.png'
 import uberSelect from '../assets/rides/uberSelect.png'
 import Image from 'next/image'
+
+import { useContext } from 'react'
+import {stateContext} from '../context/stateContext'
+
 const style = {
     wrapper: `h-full flex flex-col`,
     title: `text-gray-500 text-center text-xs py-2 border-b`,
@@ -43,14 +47,14 @@ const style = {
 //         desc:'Comfortable ride for a large group of 5'
 //     }
 // ]
+ 
 
-
-
-const basePrice =80 
 
 const RideSelector = () => {
 
-    const [carList,setCarList] = useState([])
+
+  const {basePrice} = useContext(stateContext);
+  const [carList,setCarList] = useState([])
 
     useEffect(() => {
         ;(async () => {

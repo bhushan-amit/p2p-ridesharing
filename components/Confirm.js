@@ -11,7 +11,14 @@ const style = {
 
 const Confirm = () => {
 
-  const {pickup,dropoff,currentAccount,price,selectedRide} = useContext(stateContext)
+  const {pickup,dropoff,currentAccount,price,selectedRide, setConfirmRide, confirmRide} = useContext(stateContext)
+
+    const testing = async() => {
+      
+      if(!confirmRide)
+      setConfirmRide(true);
+
+    }
 
     const storeTripDetails = async(pickup,dropoff) => {
       try {
@@ -41,7 +48,7 @@ const Confirm = () => {
         <div className={style.confirmButtonContainer}>
             <div 
             className={style.confirmButton}
-            onClick={()=> storeTripDetails(pickup,dropoff)}
+            onClick={()=> testing()}
             >
                 Confirm P2P Ride 
             </div>

@@ -14,10 +14,34 @@ const style = {
     verticalLine: `w-0 h-[2rem] border-black border absolute z-10 left-[2.3rem] top-[2rem]`,
   }
 
+  
+
 const LocationSelector = () => {
     const [inFocus,setInFocus]= useState('from')
-    const {pickup,setPickup,dropoff,setDropoff} = useContext(stateContext)
+    const {pickup,setPickup,dropoff,setDropoff, setConfirmRide} = useContext(stateContext)
+    const [inputValue, setInputValue] = useState('');
+    const [isEntered, setIsEntered] = useState(false);
+  
+    const handleKeyDown = (event) => {
 
+      if (event.key === 'Enter') {
+        console.log('Enter key pressed')
+        setDropoff(event.target.value);
+        setConfirmRide(true);
+        setIsEntered(true);
+      }
+    };
+  
+    const handleChange = (event) => {
+      setInputValue(event.target.value);
+      
+    };
+
+    const onClickHandler = (e) => {
+      handleChange(e);
+    
+    }
+  
     return (
         <div className={style.wrapper}>
           <div className={style.searchHeader}>
@@ -42,7 +66,7 @@ const LocationSelector = () => {
                 className={style.input}
                 placeholder='Enter pickup location'
                 value={pickup}
-                onChange={e => setPickup(e.target.value)}
+                onChange={(e) => setPickup(e.target.value)}
                 onFocus={() => setInFocus('from')}
               />
             </div>
@@ -64,8 +88,9 @@ const LocationSelector = () => {
               <input
                 className={style.input}
                 placeholder='Where to?'
-                value={dropoff}
-                onChange={e => setDropoff(e.target.value)}
+                value={inputValue}
+                onChange={e => onClickHandler(e) }
+                onKeyDown={e=>handleKeyDown(e)}
                 onFocus={() => setInFocus('to')}
               />
             </div>

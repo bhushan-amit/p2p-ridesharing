@@ -14,6 +14,7 @@ const Map = () => {
     const style={
         wrapper:`w-full h-screen mb-6`
     }
+    
 
     useEffect(()=>{
         const map=new mapboxgl.Map({
@@ -34,7 +35,7 @@ const Map = () => {
             if (pickupCoordinates && dropoffCoordinates){
                 try{
                 map.fitBounds([dropoffCoordinates, pickupCoordinates], {
-                padding: 80,
+                padding: 280,
                 })
             }catch(error){
                 console.log(dropoffCoordinates,pickupCoordinates+" unable to fit in bounds please wait")
