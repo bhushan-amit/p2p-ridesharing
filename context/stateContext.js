@@ -16,7 +16,7 @@ export const StateProvider = ({children}) => {
     const [price,setPrice] =useState()
     const [selectedRide,setSelectedRide]=useState()
 
-
+    
     let metamask
 
     if(typeof window !== 'undefined'){
@@ -75,7 +75,7 @@ export const StateProvider = ({children}) => {
                 })
             })
             const data = await response.json()
-    
+            console.log("Fetching Location CoOrdinates")
             if (data.message = 'success') {
                 switch (locationType) {
                 case 'pickup':
