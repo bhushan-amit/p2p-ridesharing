@@ -15,9 +15,10 @@ export default function Home() {
   return (
     <div className={style.wrapper}>
       <Navbar/>
-      <div className={style.main}>
+      {/* <div className={style.main}>
         <Map/> 
-      </div>
+      </div> */}
+      <Map/>
       <div className={style.rideRequestContainer}>
         <div className={style.rideRequest}>
             <LocationSelector/>
