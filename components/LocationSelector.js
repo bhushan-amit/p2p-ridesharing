@@ -22,13 +22,15 @@ const LocationSelector = () => {
     const [inputValue, setInputValue] = useState('');
     const [isEntered, setIsEntered] = useState(false);
   
-    const handleKeyDown = (event) => {
+    const handleKeyDown = async (event) => {
 
       if (event.key === 'Enter') {
         console.log('Enter key pressed')
         setDropoff(event.target.value);
-        setConfirmRide(true);
+        console.log(pickup,dropoff)
+        //setConfirmRide(true);
         setIsEntered(true);
+        
       }
     };
   
@@ -66,7 +68,7 @@ const LocationSelector = () => {
                 className={style.input}
                 placeholder='Enter pickup location'
                 value={pickup}
-                onChange={(e) => setPickup(e.target.value)}
+                onChange={(e) => {setPickup(e.target.value)}}
                 onFocus={() => setInFocus('from')}
               />
             </div>
@@ -89,7 +91,7 @@ const LocationSelector = () => {
                 className={style.input}
                 placeholder='Where to?'
                 value={inputValue}
-                onChange={e => onClickHandler(e) }
+                onChange={e => {onClickHandler(e)} }
                 onKeyDown={e=>handleKeyDown(e)}
                 onFocus={() => setInFocus('to')}
               />

@@ -20,6 +20,11 @@ const style = {
     time: `text-xs text-blue-500`,
     priceContainer: `flex items-center`,
     price: `mr-[-0.8rem]`,
+    hyperlink:`font-medium text-blue-600 dark:text-blue-500 hover:underline`,
+    Btnwrapper: `flex-2 h-full flex flex-col justify-between`,
+    rideSelectorContainer: `h-full flex flex-col overflow-scroll`,
+    confirmButtonContainer: ` border-t-2 cursor-pointer z-10`,
+    confirmButton: `bg-black text-white m-4 py-4 text-center text-xl`
   }
 // const carList= [
 //     {
@@ -53,7 +58,7 @@ const style = {
 const RideSelector = () => {
 
 
-  const {basePrice} = useContext(stateContext);
+  const {basePrice,setConfirmRide,rideDetails,setRideDetails} = useContext(stateContext);
   const [carList,setCarList] = useState([])
 
     useEffect(() => {
@@ -68,13 +73,51 @@ const RideSelector = () => {
           }
         })()
       }, [])
+    
+      const testing = () =>{
+        setConfirmRide(true);
+      }
+function handleHover(e){
+  console.log(e+" was selected")
+}
 
+const [hoveredItem, setHoveredItem] = useState(null);
+
+  const handleItemHover = (index) => {
+    setHoveredItem(index);
+    
+  };
+
+  const handleItemLeave = () => {
+    setHoveredItem(null);
+  };
+  useEffect(() => {
+    
+  
+    return () => {
+      console.log(rideDetails?.carData?.service+" from ride selector component -- car Data")
+    }
+  }, [rideDetails])
+  
+  const  handleItemClick= async (index)=>{
+    
+    console.log(index+" was selected")
+    await setRideDetails({
+      'carData':carList[index]
+    })
+    
+  }
   return (
     <div className={style.wrapper}>
-        <div className={style.title}>Choose a ride, or swipe up for more</div>
+        <div className={style.title}>Choose a ride, or swipe up for more <span className={style.hyperlink} onClick={()=> testing()}>Get Ride Prices</span></div>
         <div className={style.carList}>
             {carList.map((car,index) => (
-                <div key={index} className={style.car}>
+                <div key={index}
+                className={index === hoveredItem ? `flex p-3 m-2 items-center border-2 border-white bg-slate-300` : `flex p-3 m-2 items-center border-2 border-white`}
+                onMouseEnter={() => handleItemHover(index)}
+                onMouseLeave={handleItemLeave}
+                onClick={()=> handleItemClick(index)}
+                >
                     <Image
                         src={car.iconUrl}
                         className={style.carImage}
@@ -94,6 +137,9 @@ const RideSelector = () => {
                     </div>
                 </div>
             ))}
+        </div>
+        <div>
+        
         </div>
     </div>
   )

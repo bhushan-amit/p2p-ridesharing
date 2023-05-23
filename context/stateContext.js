@@ -22,6 +22,7 @@ export const StateProvider = ({children}) => {
     const [selectedRide,setSelectedRide]=useState()
     const [confirmRide,setConfirmRide]=useState(false)
     const [basePrice,setBasePrice]=useState(0)
+    const [rideDetails,setRideDetails]=useState({})
 
 
     let metamask
@@ -83,6 +84,7 @@ export const StateProvider = ({children}) => {
         useEffect(async()=>{
             let temp = await calculatePrice(distance, 40);
             setBasePrice(temp);
+            
         },[confirmRide]);
 
     }
@@ -156,7 +158,8 @@ export const StateProvider = ({children}) => {
                 createLocationCoordinatePromise(dropoff, 'dropoff')
                 ])
             })()
-            } else return
+          setConfirmRide(false)
+        } else return
         }, [pickup, dropoff])
 
     
@@ -212,7 +215,9 @@ export const StateProvider = ({children}) => {
             setConfirmRide,
             confirmRide,
             basePrice,
-            setBasePrice
+            setBasePrice,
+            rideDetails,
+            setRideDetails
             }} >
                 {children}
             </stateContext.Provider>
