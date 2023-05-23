@@ -49,6 +49,12 @@ export default {
         name:'dropoff',
         title:'Dropoff Location',
         type:'string'
-      }
+      },
+      {
+        name: 'rideStatus',
+        title: 'Ride Status',
+        type: 'string',
+       
+      },
     ],
   };
