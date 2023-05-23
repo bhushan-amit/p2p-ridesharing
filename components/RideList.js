@@ -8,7 +8,7 @@ export const fetchDocuments = async () => {
   return response;
 };
 
-const RideList = () => {
+const RideList = ({addingToMap}) => {
   const [documents, setDocuments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -38,11 +38,14 @@ const RideList = () => {
     return <div>Error occurred while fetching documents.</div>;
   }
 
+  const renderMap= async (p1,p2,l1,l2) => {
+    await addingToMap([p1,p2,l1,l2])
+  }
   return (
     <div className="container mx-auto">
       <h1 className="text-2xl font-bold mb-4">Ride List</h1>
       {documents.map((document) => (
-        <div key={document._id} className="p-4 mb-4 bg-gray-200">
+        <div key={document._id} className="p-4 mb-4 bg-gray-200" onClick={() => renderMap(document?.pickupCoordinate?.lat,document?.pickupCoordinate?.lng,document?.dropoffCoordinate?.lat,document?.dropoffCoordinate?.lng)}>
           <h2 className="text-lg font-semibold">{document.name}</h2>
           <p>Pickup Location: {document.pickup}</p>
           <p>Drop-off Location: {document.dropoff}</p>
